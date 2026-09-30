@@ -10,7 +10,10 @@
         <h1>Movie Theater Booking</h1>
         <a href="{% url 'movie_list' %}">Home</a> |
         <a href="{% url 'booking_history' %}">My Bookings</a>
-        <hr>
+        {% if user.is_authenticated %} Logged in as {{ user.username }} | <a href="{% url 'logout' %}">Logout</a> {% else %}
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}
+	<hr>
         {% block content %}
         {% endblock %}
     </div>

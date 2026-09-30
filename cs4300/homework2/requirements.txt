@@ -14,14 +14,10 @@ parse==1.22.2
 parse_type==0.6.6
 pbr==7.0.3
 psycopg2-binary==2.9.13
-pytz==2024.1
-setuptools==68.1.2
-six==1.16.0
+six==1.17.0
 soupsieve==2.10
 sqlparse==0.6.0
 sudo==1.0.0
-supervisor==4.2.5
 typing_extensions==4.16.0
 vi==0.9
-wheel==0.42.0
 whitenoise==6.12.0

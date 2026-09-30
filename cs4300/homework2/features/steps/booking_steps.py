@@ -39,5 +39,5 @@ def step_book_seat(context, seat_number, title):
 
 @then('the seat "{seat_number}" should be marked as booked')
 def step_check_seat_booked(context, seat_number):
-    context.seat.refresh_from_db()
-    assert context.seat.is_booked is True
+    from bookings.models import Booking
+    assert Booking.objects.filter(movie=context.movie, seat=context.seat).exists()
