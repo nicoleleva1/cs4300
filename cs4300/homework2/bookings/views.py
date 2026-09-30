@@ -55,21 +55,18 @@ def seat_booking(request, movie_id):
 def booking_history(request):
     my_bookings = Booking.objects.filter(user=request.user)
     return render(request, 'bookings/booking_history.html', {'bookings': my_bookings})
+
 def cancel_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
     booking.delete()
-    return redirect('booking_history')
-    
-    # Free up the seat again
-    booking.seat.is_booked = False
-    booking.seat.save()
-    
-    # Delete the booking record
-    booking.delete()
-    
     return redirect('booking_history')
 
 
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
+def create_superuser_temp(request):
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser('admin', 'admin@example.com', 'password')
+        return HttpResponse("Superuser created successfully.")
+    return HttpResponse("Superuser already exists.")
