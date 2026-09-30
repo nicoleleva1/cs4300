@@ -38,6 +38,9 @@ def seat_booking(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
     all_seats = Seat.objects.all()
 
+    # Find seat IDs already booked specifically for this movie
+    booked_seat_ids = Booking.objects.filter(movie=movie).values_list('seat_id', flat=True)
+
     # If the user submitted the form (POST request)
     if request.method == 'POST':
         chosen_seat_id = request.POST.get('seat_id')
@@ -48,7 +51,12 @@ def seat_booking(request, movie_id):
 
         return redirect('booking_history')
 
-    return render(request, 'bookings/seat_booking.html', {'movie': movie, 'seats': all_seats})
+    return render(request, 'bookings/seat_booking.html', {
+        'movie': movie,
+        'seats': all_seats,
+        'booked_seat_ids': booked_seat_ids,
+    })
+
 
 
 # Shows the current user's past bookings
