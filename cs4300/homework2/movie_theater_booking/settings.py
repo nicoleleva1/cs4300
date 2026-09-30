@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-y-!+i=!cv8h^m*iprc=-&gy!sj8*x^qs2g=upmyv0$063kbul$
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['https://app-jollypixel6611-28.lab.devedu.io']
 
 # Application definition
 

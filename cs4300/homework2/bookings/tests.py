@@ -113,3 +113,15 @@ class BookingFlowTests(TestCase):
 
         self.assertTrue(self.seat.is_booked)
         self.assertEqual(Booking.objects.count(), 1)
+    
+    def test_cancel_booking_frees_seat(self):
+        booking = Booking.objects.create(movie=self.movie, seat=self.seat, user=self.user)
+        self.seat.is_booked = True
+        self.seat.save()
+
+        self.client.login(username='flowuser', password='pass123')
+        self.client.get(f'/cancel/{booking.id}/')
+
+        self.seat.refresh_from_db()
+        self.assertFalse(self.seat.is_booked)
+        self.assertEqual(Booking.objects.count(), 0)
