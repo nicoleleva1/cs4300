@@ -73,8 +73,3 @@ def cancel_booking(request, booking_id):
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
-def create_superuser_temp(request):
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser('admin', 'admin@example.com', 'password')
-        return HttpResponse("Superuser created successfully.")
-    return HttpResponse("Superuser already exists.")

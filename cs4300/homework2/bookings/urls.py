@@ -11,7 +11,6 @@ router.register('bookings', views.BookingViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
-    path('create-superuser-temp/', views.create_superuser_temp, name='create_superuser_temp'),
     # normal website pages
     path('', views.movie_list, name='movie_list'),
     path('book/<int:movie_id>/', views.seat_booking, name='seat_booking'),
