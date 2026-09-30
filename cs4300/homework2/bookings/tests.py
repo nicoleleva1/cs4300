@@ -105,23 +105,17 @@ class BookingFlowTests(TestCase):
         self.seat = Seat.objects.create(seat_number="C3", is_booked=False)
 
     def test_booking_a_seat_marks_it_as_booked(self):
-        # Simulate submitting the seat booking form
-        response = self.client.post(f'/book/{self.movie.id}/', {'seat_id': self.seat.id})
-
-        # Refresh the seat from the database to see the updated value
-        self.seat.refresh_from_db()
-
-        self.assertTrue(self.seat.is_booked)
-        self.assertEqual(Booking.objects.count(), 1)
+    	response = self.client.post(f'/book/{self.movie.id}/', {'seat_id': self.seat.id})
+    	# Instead of checking a flag on the seat, check that a Booking now exists
+    	self.assertEqual(Booking.objects.count(), 1)
+    	self.assertTrue(Booking.objects.filter(movie=self.movie, seat=self.seat).exists())
     
     def test_cancel_booking_frees_seat(self):
-        booking = Booking.objects.create(movie=self.movie, seat=self.seat, user=self.user)
-        self.seat.is_booked = True
-        self.seat.save()
+    	booking = Booking.objects.create(movie=self.movie, seat=self.seat, user=self.user)
 
-        self.client.login(username='flowuser', password='pass123')
-        self.client.get(f'/cancel/{booking.id}/')
+    	self.client.login(username='flowuser', password='pass123')
+    	self.client.get(f'/cancel/{booking.id}/')
 
-        self.seat.refresh_from_db()
-        self.assertFalse(self.seat.is_booked)
-        self.assertEqual(Booking.objects.count(), 0)
+    	# After canceling, the booking should be gone entirely
+    	self.assertEqual(Booking.objects.count(), 0)
+    	self.assertFalse(Booking.objects.filter(movie=self.movie, seat=self.seat).exists())

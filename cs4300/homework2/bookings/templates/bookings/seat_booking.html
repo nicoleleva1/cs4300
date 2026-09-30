@@ -8,12 +8,12 @@
     {% csrf_token %}
 
     {% for seat in seats %}
-        <label>
-            <input type="radio" name="seat_id" value="{{ seat.id }}" {% if seat.is_booked %}disabled{% endif %}>
-            Seat {{ seat.seat_number }} {% if seat.is_booked %}(Taken){% endif %}
-        </label><br>
-    {% endfor %}
+    <label>
+        <input type="radio" name="seat_id" value="{{ seat.id }}" {% if seat.id in booked_seat_ids %}disabled{% endif %}>
+        Seat {{ seat.seat_number }} {% if seat.id in booked_seat_ids %}(Taken){% endif %}
+    </label><br>
+     {% endfor %}
 
-    <button type="submit" class="btn btn-success mt-3">Book Seat</button>
+<button type="submit" class="btn btn-success mt-3">Book Seat</button>
 </form>
 {% endblock %}

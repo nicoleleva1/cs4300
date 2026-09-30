@@ -46,10 +46,6 @@ def seat_booking(request, movie_id):
         # Make the booking
         Booking.objects.create(movie=movie, seat=chosen_seat, user=request.user)
 
-        # Mark the seat as booked so no one else can pick it
-        chosen_seat.is_booked = True
-        chosen_seat.save()
-
         return redirect('booking_history')
 
     return render(request, 'bookings/seat_booking.html', {'movie': movie, 'seats': all_seats})
@@ -61,6 +57,8 @@ def booking_history(request):
     return render(request, 'bookings/booking_history.html', {'bookings': my_bookings})
 def cancel_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+    booking.delete()
+    return redirect('booking_history')
     
     # Free up the seat again
     booking.seat.is_booked = False
