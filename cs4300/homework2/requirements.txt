@@ -10,7 +10,6 @@ dj-database-url==3.1.2
 Django==6.1.1
 djangorestframework==3.18.1
 gunicorn==26.2.0
-gyp==0.1
 parse==1.22.2
 parse_type==0.6.6
 pbr==7.0.3
