@@ -8,15 +8,6 @@ from .serializers import MovieSerializer, SeatSerializer, BookingSerializer
 
 
 #  API VIEWS (for /api/ endpoints)
-from django.contrib.auth.models import User
-from django.http import HttpResponse
-
-def create_superuser_temp(request):
-    if not User.objects.filter(username='username').exists():
-        User.objects.create_superuser('username', 'admin@example.com', 'password')
-        return HttpResponse("Superuser created successfully.")
-    return HttpResponse("Superuser already exists.")
-
 class MovieViewSet(viewsets.ModelViewSet):
     # This gives us list, create, update, delete for free
     queryset = Movie.objects.all()
@@ -79,3 +70,13 @@ def cancel_booking(request, booking_id):
     booking.delete()
     
     return redirect('booking_history')
+
+
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+def create_superuser_temp(request):
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser('admin', 'admin@example.com', 'password')
+        return HttpResponse("Superuser created successfully.")
+    return HttpResponse("Superuser already exists.")
