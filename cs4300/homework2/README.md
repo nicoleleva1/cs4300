@@ -5,8 +5,6 @@ A Django + Django REST Framework app for viewing movies, booking seats, and chec
 ## Live Demo
 Render URL: https://cs4300-otnk.onrender.com
 
-**Note on data:** This app uses SQLite, which resets on redeploy on Render's free tier. The current live data (movies, seats) was added directly through /admin/ and will remain visible unless the app is redeployed again.
-
 ## Features
 - View movie listings (via API and web page)
 - Book seats for a movie, with per-movie seat availability (via API and web page)
@@ -18,8 +16,11 @@ Render URL: https://cs4300-otnk.onrender.com
 - `GET/POST /api/seats/` — list and create seats
 - `GET/POST /api/bookings/` — view booking history, create new bookings
 
+## Database
+This app uses PostgreSQL in production (Render) for persistent data storage, and SQLite for local development. The database connection is configured via the `DATABASE_URL` environment variable using `dj-database-url`.
+
 ## Setup Instructions (Local)
-1. Clone the repo: `git clone https://github.com/nicoleleva1/cs4300`
+1. Clone the repo: `git clone <your-repo-url>`
 2. Navigate into the project: `cd homework2`
 3. Create a virtual environment: `python3 -m venv myenv`
 4. Activate it: `source myenv/bin/activate`
@@ -34,5 +35,4 @@ Render URL: https://cs4300-otnk.onrender.com
 - BDD tests: `python manage.py behave`
 
 ## AI Usage Disclosure
-Claude (Anthropic) was used throughout this assignment to help generate boilerplate code for models, views, serializers, templates, and test cases; to explain Django and Django REST Framework concepts; and to troubleshoot environment, git, and deployment errors (virtual environment issues, CSRF/ALLOWED_HOSTS configuration, Render deployment setup, and a per-movie seat availability bug). All generated code was reviewed, tested, and adjusted by me before being included in this project.
-
+Claude (Anthropic) was used throughout this assignment to help generate boilerplate code for models, views, serializers, templates, and test cases; to explain Django and Django REST Framework concepts; and to troubleshoot environment, git, and deployment errors (virtual environment issues, CSRF/ALLOWED_HOSTS configuration, Render deployment setup, a per-movie seat availability bug, and switching from SQLite to PostgreSQL for persistent data storage on Render). All generated code was reviewed, tested, and adjusted by me before being included in this project.
