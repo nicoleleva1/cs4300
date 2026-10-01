@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'bookings.middleware.AutoAdminMiddleware',
 ]
 
 ROOT_URLCONF = 'movie_theater_booking.urls'

@@ -9,7 +9,7 @@ Render URL: https://cs4300-otnk.onrender.com
 - View movie listings (via API and web page)
 - Book seats for a movie, with per-movie seat availability (via API and web page)
 - View and cancel booking history (via API and web page)
-- No login required — anyone can book seats and view booking history
+- No login required — for demo purposes, all visitors are automatically logged in as an admin account, with full access to the Django admin panel at /admin/
 
 
 ## API Endpoints
